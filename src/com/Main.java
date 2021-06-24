@@ -22,7 +22,7 @@ public class Main {
             System.out.println("6.Get the list of books borrowed by a particular student ");
             System.out.println("7.Exit");
 
-            int ch=0;
+            int ch;
 
             try {
                 ch= scanner.nextInt();
@@ -36,13 +36,28 @@ public class Main {
 
             switch (ch) {
                 case 1:
-                    lib.addBook();
+                    try{
+                        lib.addBook();
+                    }
+                    catch (BookAlreadyExistsException e){
+                        System.out.println(e);
+                    }
                     break;
                 case 2:
-                    lib.getBookInfo();
+                    try{
+                        lib.getBookInfo();
+                    }
+                    catch(BookDoesNotExistException e) {
+                        System.out.println(e);
+                    }
                     break;
                 case 3:
-                    lib.regStudent();
+                    try{
+                        lib.regStudent();
+                    }
+                    catch(StudentAlreadyExistsException e){
+                        System.out.println(e);
+                    }
                     break;
                 case 4:
                     lib.lendBook();

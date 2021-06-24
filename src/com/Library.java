@@ -24,7 +24,7 @@ public class Library {
         this.name = name;
     }
 
-    public void addBook() {
+    public void addBook() throws BookAlreadyExistsException {
         String name,author;
         int bookId;
         Scanner sc = new Scanner(System.in);
@@ -40,11 +40,17 @@ public class Library {
         System.out.println("Enter book id : ");
         bookId = sc.nextInt();
 
-        books.put(bookId,new Book(name,author, bookId));
-        System.out.println("Book added successfully!");
+        if(books.containsKey(bookId)) {
+            throw new BookAlreadyExistsException();
+        }
+        else {
+            books.put(bookId,new Book(name,author, bookId));
+            System.out.println("Book added successfully!");
+        }
+
     }
 
-    public void getBookInfo() {
+    public void getBookInfo() throws BookDoesNotExistException {
         int bookId;
         Scanner sc = new Scanner(System.in);
 
@@ -55,12 +61,12 @@ public class Library {
             System.out.println( books.get(bookId) );
         }
         else {
-            System.out.println("Book does not exists");
+            throw new BookDoesNotExistException();
         }
 
     }
 
-    public void regStudent() {
+    public void regStudent() throws StudentAlreadyExistsException {
         String name,rollNo;
         Scanner sc = new Scanner(System.in);
 
@@ -71,7 +77,7 @@ public class Library {
         rollNo = sc.next();
 
         if(memberStudents.containsKey(rollNo)) {
-            System.out.println("Student is already a member!");
+            throw new StudentAlreadyExistsException();
         }
         else{
             memberStudents.put(rollNo, new Student(name, rollNo));
