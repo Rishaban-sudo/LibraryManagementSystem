@@ -1,5 +1,6 @@
 package com;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -21,7 +22,18 @@ public class Main {
             System.out.println("6.Get the list of books borrowed by a particular student ");
             System.out.println("7.Exit");
 
-            int ch= scanner.nextInt();
+            int ch=0;
+
+            try {
+                ch= scanner.nextInt();
+            }
+            catch (InputMismatchException e) {
+                System.out.println("Please enter a number to confirm your choice !");
+                scanner.nextLine();
+                continue;
+            }
+
+
             switch (ch) {
                 case 1:
                     lib.addBook();
